@@ -1,0 +1,18 @@
+services:
+  # Nginx Service
+  nginx:
+    build: .docker/nginx
+    environment:
+      HOSTNAME: ${HOSTNAME}
+    ports:
+      - 80:80
+    volumes:
+      - './:/var/www/html'
+    depends_on:
+      - php
+
+  # PHP Service
+  php:
+    build: .docker/php
+    volumes:
+      - './:/var/www/html'
