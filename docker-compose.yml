@@ -1,9 +1,16 @@
+# Environment Variables
+x-environment: &default-environment
+  HOSTNAME: ${HOSTNAME}
+  MYSQL_DATABASE: ${MYSQL_DATABASE}
+  MYSQL_USER: ${MYSQL_USER}
+  MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
 services:
   # Nginx Service
   nginx:
     build: .docker/nginx
     environment:
-      HOSTNAME: ${HOSTNAME}
+      <<: *default-environment
     ports:
       - 80:80
     volumes:
@@ -14,5 +21,18 @@ services:
   # PHP Service
   php:
     build: .docker/php
+    environment:
+      <<: *default-environment
     volumes:
       - './:/var/www/html'
+    depends_on:
+      - mysql
+
+  # MySQL Database Service
+  mysql:
+    image: mysql:8.0
+    environment:
+      <<: *default-environment
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - 3306:3306
