@@ -14,7 +14,7 @@ services:
     ports:
       - 80:80
     volumes:
-      - './:/var/www/html'
+      - './web:/var/www/html'
     depends_on:
       - php
 
@@ -24,7 +24,7 @@ services:
     environment:
       <<: *default-environment
     volumes:
-      - './:/var/www/html'
+      - './web:/var/www/html'
     depends_on:
       - mysql
 
