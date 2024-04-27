@@ -9,7 +9,7 @@ try {
   // Create the connection.
   $conn = new mysqli('mysql', getenv('MYSQL_USER'), getenv('MYSQL_PASSWORD'), getenv('MYSQL_DATABASE'));
   if (!$conn->connect_error) {
-    print "✅ Database connection established.";
+    print "✅ Database connection established.<br>";
   }
 
   $sql = "SELECT * FROM posts;";
@@ -30,10 +30,8 @@ try {
     print '0 results';
   }
 
-  // Close the connection.
   $conn->close();
 }
 catch (mysqli_sql_exception $e) {
-  // Catch connection error and log it.
-  die("❌ Database connection failed: " . $e->getMessage());
+  die("❌ Database connection error: " . $e->getMessage());
 }

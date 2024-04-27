@@ -26,7 +26,12 @@ A docker configuration for a simple php application. Consists of PHP, Nginx and 
    ```sh
    docker compose up -d --build
    ```
-4. Visit http://localhost in your browser.
+4. Import mysql test data, replace `example_user`, `password` and `example_db` with the `MYSQL_USER`, `MYSQL_PASSWORD` and `MYSQL_DATABASE` values you've defined in the `.env` file.
+   ```sh
+   docker compose exec docker-php-app-mysql-1 mysql -u example_user -p password example_db < .docker/mysql/db-test-data.sql
+   ```
+
+5. Visit http://localhost in your browser.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
